@@ -1,0 +1,72 @@
+i need help. i wanna create my own youtube. SelvaTUBE...
+
+First of all background for main menu will appear.
+
+top of the site going to be on the upper side of backgrounds.Backgrounds and top and bottoms sides of the site shouldnt be touching each other her.
+Picture of me and main menu button going to be on the top of the site.png
+Picture of me going to be left upper side corner
+main menu button going to Show up when a video is playing on the right corner.
+bottom of the side.png going to be on bottom.
+Vlogs button, short videos button,game button going to be on bottom of the site.png
+
+clicking on the vlogs button will take us to listed vlog videos from vlog folder.
+clicking on the games button will take us to listed gaming videos from gaming folder.
+clicking on the short videos button will take us to listed short videos from short videos folder
+clicking on main menu button will take us to background for main menu.png
+
+VIDEOS GOING TO BE LISTED ON BACKGROUND FOR MAIN MENU.PNG WITH THEIR OWN COVERS
+VIDEO NAMES GOING TO BE UNDER LISTED VİDEOS. THEIR SIZE GOING TO BE LIKE 22.
+VIDEO PLAYING GOING TO BE ON THE ALL OF THE BLACK AREA. THE VIDEO NAMES SIZE GOING TO BE LIKE 35 but it must be written under the playing video.
+WHEN WE PLAY A VIDEO, playing videos backgroung.png will appear.
+
+VIDEOS FROM GAMING FOLDER
+Valo ama sinirim bozuldu.mp4                             cover of video 6.png
+Valo ama bir kız olarak mic açtım.mp4                    cover of video 5.png
+Valo ama odamda kilitli kaldım şaka mı.mp4               cover of video 4.png
+Valo ama webcamin yerini değiştim.mp4                    cover of video 3.png          
+Valo ama Kurban Bayramı.mp4                              cover of video 2.png
+Sims 4 ama Ecemin yeni hayatı 1.mp4                      cover of video 1.png
+ 
+VIDEOS FROM VLOGS FOLDER
+no videos
+
+VIDEOS FROM SHORT VIDEOS FOLDER.
+no videos 
+
+covers from VIDEO COVERS FOLDER
+
+i want it to be playable on tablets and iphones.so i will use github so it must be eligible for other devices and github.
+
+playing video must replace black area. and backgroung for main menu must be covering all screen on the condition that it doesnt touch with other elements. you put additional buttons, which i didnt like. you forgot to list random videos from my folders on background for main menu. Plus, that random videos from my folders like gaming etc must replace buttons which you created and put them on the middle of the screen.
+
+my Picture,png must be in a normal shape and size can be like 23. it also must be on the left corner.
+
+videos thumblairs going to be in the same names with matching videos like
+
+docs names                                             folder
+
+playing videos background .png        SelvaTUBE
+The GAMES button.png                  SelvaTUBE
+picture of me.jpg                     SelvaTUBE
+Short videos button.png               SelvaTUBE
+VLOGS button.png                      SelvaTUBE
+bottom of the site.png                SelvaTUBE
+background for main menu.png          SelvaTUBE
+main menu button .png                 SelvaTUBE
+top of the site.png                   SelvaTUBE
+Valo ama sinirim bozuldu.mp4                           GAMING
+Valo ama bir kız olarak mic açtım.mp4                  GAMING 
+Valo ama odamda kilitli kaldım şaka mı.mp4             GAMING 
+Valo ama webcamin yerini değiştim.mp4                  GAMING  
+Valo ama Kurban Bayramı.mp4                            GAMING  
+Sims 4 ama Ecemin yeni hayatı 1.mp4                    GAMING  
+1.png                                VIDEO COVERS
+2.png                                VIDEO COVERS
+3.png                                VIDEO COVERS
+4.png                                VIDEO COVERS
+5.png                                VIDEO COVERS
+6.png                                VIDEO COVERS
+
+Valo ama sinirim bozuldu.mp4         https://youtu.be/1pvTa-wBBRQ
+Valo ama bir kız olarak mic açtım.mp4  https://youtu.be/Ph015D4UYYQ
+Valo ama webcamin yerini değiştim.mp4  https://youtu.be/jzmzP1WrUo0

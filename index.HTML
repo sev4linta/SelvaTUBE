@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SelvaTUBE</title>
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+body, html {width:100%; height:100%; font-family:Arial, sans-serif;}
+
+/* Screens */
+#menuScreen, #playerScreen {
+  width:100%; height:100%;
+  position:absolute; top:0; left:0;
+  background-size:cover; background-position:center;
+  display:none; flex-direction:column;
+}
+#menuScreen {display:flex; background-image:url('background for main menu.png');}
+
+/* Top + bottom bars */
+.top-bar, .bottom-bar {
+  width:100%; flex-shrink:0; position:relative;
+}
+.top-bar img.top-bg, .bottom-bar img.bottom-bg { 
+  display:block; width:100%; height:100px; object-fit:cover;
+}
+.top-left-photo {
+  position:absolute; top:0; left:0; width:100px; height:100px; object-fit:cover; z-index:10;
+}
+.main-menu-btn {
+  position:absolute; top:0; right:0; width:100px; height:100px; cursor:pointer; display:none; z-index:10;
+}
+
+/* Main menu video grid */
+.video-grid {
+  flex:1; display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap:20px;
+  padding:20px;
+  margin-top:120px; margin-bottom:140px;
+  overflow-y:auto;
+}
+.video-item img {
+  width:100%; aspect-ratio:16/9; object-fit:cover;
+  box-shadow:0 4px 10px rgba(0,0,0,0.4);
+}
+.video-item p {margin-top:5px; font-size:40px; color:white; text-align:center;}
+
+/* Category buttons */
+.category-buttons {
+  position:absolute; bottom:20px; width:100%;
+  display:flex; justify-content:center; gap:40px;
+}
+.category-buttons img {width:120px; cursor:pointer;}
+
+/* Player screen */
+#playerScreen {background-image:url('playing videos background .png'); flex-direction:column;}
+.player-content {
+  flex:1; display:flex; flex-direction:row; gap:20px; padding:20px;
+}
+video {
+  flex:2; width:100%; height:auto; background:black; border-radius:12px;
+  object-fit:cover;
+}
+#videoTitle {font-size:45px; color:white; margin-bottom:15px; text-align:center;}
+
+/* Shorts (reels) player görünümü */
+.reels-video {
+  width: 100%;
+  max-width: 360px;   /* Telefon gibi dikey */
+  aspect-ratio: 9/16;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Right-side playlist */
+.side-playlist {
+  flex:1; overflow-y:auto; color:white;
+}
+.side-playlist h3 {font-size:25px; margin-bottom:10px;}
+.side-playlist .video-item {
+  display:flex; align-items:center; margin-bottom:15px; cursor:pointer;
+}
+.side-playlist .video-item img {
+  width:160px; height:90px; object-fit:cover; margin-right:10px; box-shadow:0 2px 6px rgba(0,0,0,0.3);
+}
+.side-playlist .video-item p {font-size:20px; margin:0; color:white;}
+
+@media (max-width:768px){
+  .video-grid {grid-template-columns: repeat(auto-fit, minmax(200px,1fr));}
+  .video-item p {font-size:28px;}
+  #videoTitle {font-size:35px;}
+  .top-left-photo, .main-menu-btn {width:100px; height:100px;}
+  .category-buttons img {width:90px;}
+  .player-content {flex-direction:column; align-items:center;}
+  video {width:100%;}
+  .side-playlist {width:100%; margin-top:20px;}
+  .side-playlist .video-item {flex-direction:row;}
+}
+</style>
+</head>
+<body>
+
+<!-- MAIN MENU -->
+<div id="menuScreen">
+  <div class="top-bar">
+    <img src="top of the site.png" alt="Top bar" class="top-bg" />
+    <img src="picture of me.jpg" alt="Me" class="top-left-photo" />
+  </div>
+  <div class="video-grid" id="videoGrid"></div>
+  <div class="bottom-bar">
+    <img src="bottom of the site.png" alt="Bottom bar" class="bottom-bg" />
+    <div class="category-buttons" id="categoryButtons">
+      <img src="VLOGS button.png" alt="Vlogs" onclick="filterCategory('VLOG')" />
+      <img src="The GAMES button.png" alt="Games" onclick="filterCategory('GAMING')" />
+      <img src="Short videos button.png" alt="Shorts" onclick="filterCategory('SHORTS')" />
+    </div>
+  </div>
+</div>
+
+<!-- PLAYER SCREEN -->
+<div id="playerScreen">
+  <div class="top-bar">
+    <img src="top of the site.png" alt="Top bar" class="top-bg" />
+    <img src="picture of me.jpg" alt="Me" class="top-left-photo" />
+    <img src="main menu button .png" alt="Menu" class="main-menu-btn" onclick="showMenu()" />
+  </div>
+  <div class="player-content">
+    <div style="flex:2; display:flex; flex-direction:column; align-items:center;">
+      <div id="videoTitle"></div>
+      <video id="videoPlayer" controls></video>
+    </div>
+    <div class="side-playlist" id="upNextListContainer">
+      <h3>Other Videos</h3>
+      <div id="upNextList"></div>
+    </div>
+  </div>
+  <div class="bottom-bar">
+    <img src="bottom of the site.png" alt="Bottom bar" class="bottom-bg" />
+  </div>
+</div>
+
+<script>
+const DATA = {
+  GAMING: [
+    {title:"Valo ama sinirim bozuldu", src:"Valo ama sinirim bozuldu.mp4", cover:"6.png"},
+    {title:"Valo ama bir kız olarak mic açtım", src:"Valo ama bir kız olarak mic açtım.mp4", cover:"5.png"},
+    {title:"Valo ama odamda kilitli kaldım şaka mı", src:"Valo ama odamda kilitli kaldım şaka mı.mp4", cover:"4.png"},
+    {title:"Valo ama webcamin yerini değiştim", src:"Valo ama webcamin yerini değiştim.mp4", cover:"3.png"},
+    {title:"Valo ama Kurban Bayramı", src:"Valo ama Kurban Bayramı.mp4", cover:"2.png"},
+    {title:"Sims 4 ama Ecemin yeni hayatı 1", src:"Sims 4 ama Ecemin yeni hayatı 1.mp4", cover:"1.png"}
+  ],
+  VLOG: [],
+  SHORTS: [
+    {title:"from happiness to sadness", src:"hüzün.mp4", cover:"7.png"},
+  ]
+};
+
+let currentCategory = "ALL";
+let allVideos = [];
+
+function shuffle(array) { return array.sort(() => Math.random() - 0.5); }
+
+function buildAllVideos() {
+  allVideos = [...DATA.GAMING, ...DATA.VLOG, ...DATA.SHORTS];
+  allVideos = shuffle(allVideos);
+}
+
+function showMenu() {
+  document.getElementById("menuScreen").style.display = "flex";
+  document.getElementById("playerScreen").style.display = "none";
+  document.querySelector(".main-menu-btn").style.display = "none";
+  buildVideoGrid(currentCategory);
+}
+
+function buildVideoGrid(category = "ALL") {
+  const grid = document.getElementById("videoGrid");
+  grid.innerHTML = "";
+  let videos = category === "ALL" ? allVideos : DATA[category];
+  shuffle(videos);
+  videos.forEach((vid, i) => {
+    const div = document.createElement("div");
+    div.className = "video-item";
+    div.innerHTML = `<img src="${vid.cover}" alt="${vid.title}"><p>${vid.title}</p>`;
+    div.onclick = () => playVideo(vid, videos, i);
+    grid.appendChild(div);
+  });
+}
+
+function filterCategory(cat) {
+  currentCategory = cat;
+  buildVideoGrid(cat);
+}
+
+function playVideo(video, list, index) {
+  document.getElementById("menuScreen").style.display = "none";
+  document.getElementById("playerScreen").style.display = "flex";
+  document.querySelector(".main-menu-btn").style.display = "block";
+
+  const player = document.getElementById("videoPlayer");
+  const title = document.getElementById("videoTitle");
+  const upNext = document.getElementById("upNextList");
+
+  player.src = video.src;
+  player.play();
+  title.textContent = video.title;
+
+  // Shorts oynatılırsa reels görünümüne geç
+  if (DATA.SHORTS.includes(video)) {
+    player.classList.add("reels-video");
+  } else {
+    player.classList.remove("reels-video");
+  }
+
+  upNext.innerHTML = "";
+  list.forEach((v, i) => {
+    if (i !== index) {
+      const div = document.createElement("div");
+      div.className = "video-item";
+      div.innerHTML = `<img src="${v.cover}" alt="${v.title}"><p>${v.title}</p>`;
+      div.onclick = () => playVideo(v, list, i);
+      upNext.appendChild(div);
+    }
+  });
+}
+
+// Init
+buildAllVideos();
+buildVideoGrid();
+</script>
+
+</body>
+</html>
+
